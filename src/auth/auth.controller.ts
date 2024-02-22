@@ -16,7 +16,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Login user' })
   @ApiResponse({
     status: 200,
-    description: 'User logged in successful and return a bearer token.',
+    description: 'User logged in successfully',
   })
   @Post('login')
   async login(@Body() loginUserDto: LoginUserDto) {
