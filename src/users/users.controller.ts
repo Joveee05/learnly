@@ -8,6 +8,8 @@ import {
   Param,
   Delete,
   Patch,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -31,6 +33,16 @@ export class UsersController {
   @ApiResponse({ status: 201, description: 'User created successful.' })
   @Post('signup')
   async create(@Body() createUserDto: CreateUserDto): Promise<any> {
+    const exsitingUser = await this.userService.findByEmail(
+      createUserDto.email,
+    );
+
+    if (exsitingUser) {
+      throw new HttpException(
+        'An account already exists with this email',
+        HttpStatus.CONFLICT,
+      );
+    }
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     createUserDto.password = hashedPassword;
     const userId = await this.userService.createUser(createUserDto);
