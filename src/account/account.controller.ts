@@ -10,8 +10,8 @@ import {
 import { AccountService } from './account.service';
 import { AccountDto } from './dto/account.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/decorator/get-user.decorator';
-import { User } from 'src/users/users.model';
+import { GetUser } from '../decorator/get-user.decorator';
+import { User } from '../users/users.model';
 import {
   ApiBearerAuth,
   ApiOperation,
