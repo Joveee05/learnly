@@ -7,15 +7,14 @@ async function bootstrap() {
   app.enableCors();
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Banking application API')
+    .setTitle('Learnly Financial System API')
     .setDescription(
-      'An API for a banking application built with NestJS, MongoDB, and PassportJS for authentication.',
+      'An API for a financial system within a software development company built with NestJS, MongoDB, and PassportJS for authentication.',
     )
     .setVersion('1.0')
-    .addTag('banking')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api-docs', app, document);
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
