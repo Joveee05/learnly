@@ -3,13 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Transaction } from './transaction.model';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { AccountService } from 'src/account/account.service';
+import { AccountService } from '../account/account.service';
 
 @Injectable()
 export class TransactionService {
   constructor(
     @InjectModel('Transaction')
-    private readonly TransactionModel: Model<Transaction>,
+    private readonly transactionModel: Model<Transaction>,
     private accountService: AccountService,
   ) {}
 
@@ -22,7 +22,7 @@ export class TransactionService {
     const { amount, type } = createTransactionDto;
 
     if (type === 'credit') {
-      const newTransaction = new this.TransactionModel({
+      const newTransaction = new this.transactionModel({
         ...createTransactionDto,
         userId,
       });
@@ -36,7 +36,7 @@ export class TransactionService {
       if (balance < amount) {
         throw new NotFoundException('Insufficient funds.');
       }
-      const newTransaction = new this.TransactionModel({
+      const newTransaction = new this.transactionModel({
         ...createTransactionDto,
         userId,
       });
@@ -57,7 +57,7 @@ export class TransactionService {
       if (sourceBalance < amount || !getDesinationAcct) {
         throw new NotFoundException('Insufficient funds.');
       }
-      const newTransaction = new this.TransactionModel({
+      const newTransaction = new this.transactionModel({
         ...createTransactionDto,
         userId,
       });
@@ -71,11 +71,10 @@ export class TransactionService {
   }
 
   async getTransactionsByUser(id: string): Promise<Transaction[]> {
-    const transactions = await this.TransactionModel.find({
+    const transactions = await this.transactionModel.find({
       userId: id,
-    })
-      .sort('-createdAt')
-      .exec();
+    });
+
     if (!transactions) {
       throw new NotFoundException('User has no transactions.');
     }
