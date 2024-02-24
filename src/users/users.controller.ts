@@ -15,7 +15,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/decorator/get-user.decorator';
+import { GetUser } from '../decorator/get-user.decorator';
 import { User } from './users.model';
 import {
   ApiBearerAuth,
@@ -45,8 +45,8 @@ export class UsersController {
     }
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     createUserDto.password = hashedPassword;
-    const userId = await this.userService.createUser(createUserDto);
-    return userId;
+    const user = await this.userService.createUser(createUserDto);
+    return user;
   }
 
   @ApiBearerAuth()
@@ -102,7 +102,7 @@ export class UsersController {
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
     @GetUser() user: User,
-  ): Promise<any> {
+  ): Promise<User> {
     return await this.userService.updateUserById(id, user, updateUserDto);
   }
 }
