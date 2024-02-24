@@ -7,7 +7,7 @@ async function bootstrap() {
   app.enableCors();
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Learnly Financial System API')
+    .setTitle('Learnly Financial Management System')
     .setDescription(
       'An API for a financial system within a software development company built with NestJS, MongoDB, and PassportJS for authentication.',
     )
