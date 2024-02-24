@@ -1,67 +1,306 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Learnly Financial System
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This API was built using :
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- NestJS (NodeJS Framework)
+- Mongoose (ODM that helps you to create a Schema based on the Model)
+- Swagger(For API Documentation)
+- Postman(For testing enpoints)
+- MongoDB (NoSQL Database)
+- Docker (Platform to deploy applications using containers)
 
-## Description
+GitHub Repository: https://github.com/Joveee05/learnly
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
+Prerequisite: NodeJs & Postman installed, Docker (Docker desktop on windows/Mac Machines, Docker installed natively on Linux)
 
-```bash
-$ npm install
+## NestJS
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611143647173/upHLKKOgs.png)
+
+NestJs is a Node.js framework for building efficient and scalable applications, with full support to Typescript. It has a CLI you can use to generate projects and block easily. It uses express under the hood but has many interesting features like the building blocks:
+
+- Modules
+- Providers
+- Controllers
+- Services
+
+---
+
+## Mongoose
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611144288219/UhL2jsSdK.png)
+
+Mongoose is an ODM (Object Data Modeling) javascript library for MongoDB and Node.
+
+It is used to manage data relationships, Schemas and helps you to connect to a mongo db using mongo DRIVER
+
+---
+
+## MongoDB
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611144597161/QGFJuh1z9.png)
+
+MongoDB is a NoSQL database. It stores documents and by using a Json-like object structure it's very easy to use with a Node application
+
+In this project, I used MongoDB Atlas, which is a cloud solution and it's perfect. But of course, we could use it locally, even better if inside a docker container.
+
+---
+
+## DOCKER
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1610521677853/SGKWuYsvU.png)
+
+Docker is a platform to build run and share application using the idea of containers.
+
+### Project Setup
+
+Install NestJS CLI
+
+NestJS comes with an easy to use CLI, that you can install globally (or locally) and it helps you to get started and use NestJS
+
+```
+npm install -g @nestjs/cli
 ```
 
-## Running the app
+Install dependencies
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```
+npm install
 ```
 
-## Test
+Run
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```
+nest start
 ```
 
-## Support
+The app will be running on http://localhost:4040/
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Using the nest CLI, I generated files for the resource I wanted to create:
 
-## License
+- a controller
+- a service
+- a module
 
-Nest is [MIT licensed](LICENSE).
+```bash
+nest generate controller users
+```
+
+```bash
+nest generate service users
+```
+
+```bash
+nest generate module users
+```
+
+In the `src/users` folder and I created a user.model.ts file. From the command line:
+
+```
+touch src/users/user.model.ts
+```
+
+The project structure looks like this:
+
+![image.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1611136117342/0Eb9sEdO_.png)
+
+---
+
+### Model
+
+In the users.model.ts, I created a model for the resource I wanted to use.
+I used a 'user' resource, with name, email, role, password, phone_number of the type string, string, string, string, and number respectively. Please note that here I am not using Typescript types, but plain JavaScript ones.
+
+We don't need to add the "id" primary key in the schema, because it will be generated by Mongoose
+
+```typescript
+import * as mongoose from 'mongoose';
+
+export const UserSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, index: true },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: { type: String, required: true },
+    phone_number: { type: Number, required: true, unique: true },
+    role: { type: String, required: true, default: 'user' },
+  },
+  {
+    toJSON: {
+      transform(doc, ret) {
+        delete ret.password;
+      },
+    },
+    versionKey: false,
+    timestamps: true,
+  },
+);
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  phone_number: number;
+  role: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+### Service
+
+I used a Nest Service, which will be called by the controller functions.
+
+Using the Mongoose library, we can easily work with objects in the Mongo Database
+
+I also imported "NotFoundException" to have better error Handling in the application.
+
+users.service.ts
+
+```typescript
+import { UpdateUserDto } from './dto/update-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from './users.model';
+import { CreateUserDto } from './dto/create-user.dto';
+import * as bcrypt from 'bcrypt';
+
+@Injectable()
+export class UsersService {
+  constructor(@InjectModel('User') private userModel: Model<User>) {}
+
+  async findByEmail(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email }).exec();
+  }
+
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.userModel.create(createUserDto);
+    return newUser;
+  }
+  /**
+   * Find all users
+   */
+  async getUsers(user: User): Promise<User[]> {
+    const users = await this.userModel.find();
+    if (user.role === 'admin') {
+      return users
+        .filter((user) => user.role !== 'admin')
+        .map((user) => ({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          phone_number: user.phone_number,
+          role: user.role,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        }));
+    } else {
+      throw new NotFoundException('No users.');
+    }
+  }
+}
+```
+
+---
+
+## EndPoints
+
+```bash
+# SignUp
+POST /api/v1/auth/signup
+
+# User login
+POST /api/v1/auth/login
+
+# Create a transaction
+POST /api/v1/transactions
+
+# Get all transactions of a particular user
+GET /api/v1/transactions/:userId
+
+# Create an account
+POST /api/v1/accounts
+
+# Get account details of a user
+GET /api/v1/accounts/:userId
+
+```
+
+## Examples
+
+```
+{
+    path: /api/v1/auth/signup,
+    method: POST,
+    body: {
+        "email": "xyz@abc.com",
+	      "name": "John Doe",
+	      "password": "test1234",
+	      "phone_number": "54545545445"
+    }
+}
+{
+    path: /api/v1/auth/login
+    method: POST,
+    body: {
+        "email": "abc@abc.com",
+	      "password": "test1234"
+    }
+}
+{
+    path: /api/v1/transactions
+    method: POST,
+    body: {
+        "userId": "65d63d1fc45da84791ccce94",
+	      "amount": 8000,
+	      "type": "debit", "credit" or "transfer"
+	      "destAcctNumber"?: "99340639" (Only applicable if transaction type is a transfer)
+    }
+}
+{
+    path: /api/v1/transactions/:userId,
+    method: GET,
+    params: {
+      userId: 564yhjdj722822
+    }
+}
+{
+    path: /api/v1/accounts,
+    method: POST,
+    body: {
+      "name": "Brian Jovi",
+	    "userId": "65d67777d741fce5928405d1"
+    }
+  The user's account number will automatically be generated.
+}
+{
+    path: /api/v1/accounts/:userId,
+    method: GET,
+    params: {
+      userId: 564yhjdj722822
+    }
+}
+
+```
+
+## Swagger Documentation
+
+```bash
+
+http://localhost:4040/api-docs
+
+```
+
+## Author
+
+**©️ Brian Etaghene**
