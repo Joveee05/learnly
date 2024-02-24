@@ -1,4 +1,4 @@
-# Learnly Financial Management System
+# Learnly Financial Management System API
 
 This API was built using :
 
