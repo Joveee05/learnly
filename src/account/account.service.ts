@@ -14,25 +14,24 @@ export class AccountService {
   ) {}
 
   async createAcct(
-    AccountDto: AccountDto,
+    accountDto: AccountDto,
     user: User,
   ): Promise<Account | null> {
-    let result: any;
-    const newAccount = new this.AccountModel(AccountDto);
+    if (user.role !== 'admin') {
+      throw new NotFoundException('Unauthorized to create account.');
+    }
+    const newAccount = new this.AccountModel(accountDto);
+    const account = await newAccount.save();
 
-    const account = newAccount.save();
     if (!account) {
       throw new NotFoundException('Could not create account.');
     }
-    if (user.role === 'admin') {
-      result = newAccount;
-    }
 
-    return result;
+    return account;
   }
 
   async getAccts(user: User): Promise<Account[]> {
-    const accounts = await this.AccountModel.find().exec();
+    const accounts = await this.AccountModel.find();
     if (user.role === 'admin') {
       return accounts.map(
         (account): Account => ({
