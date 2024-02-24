@@ -261,10 +261,10 @@ GET /api/v1/accounts/:userId
     path: /api/v1/transactions
     method: POST,
     body: {
-        "userId": "65d63d1fc45da84791ccce94",
-	      "amount": 8000,
-	      "type": "debit", "credit" or "transfer"
-	      "destAcctNumber"?: "99340639" (Only applicable if transaction type is a transfer)
+        "userId": "65d63d1f",
+	"amount": 8000,
+	"type": "debit", "credit" or "transfer"
+	"destAcctNumber"?: "99340639" (Only applicable if transaction type is a transfer)
     }
 }
 {
@@ -278,8 +278,8 @@ GET /api/v1/accounts/:userId
     path: /api/v1/accounts,
     method: POST,
     body: {
-      "name": "Brian Jovi",
-	    "userId": "65d67777d741fce5928405d1"
+	"name": "Brian Jovi",
+	"userId": "65d67777d741fce5928405d1"
     }
   The user's account number will automatically be generated.
 }
