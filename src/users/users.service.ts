@@ -8,16 +8,15 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+  constructor(@InjectModel('User') private userModel: Model<User>) {}
 
   async findByEmail(email: string): Promise<User | null> {
     return this.userModel.findOne({ email }).exec();
   }
 
-  async createUser(CreateUserDto: CreateUserDto): Promise<User> {
-    const newUser = new this.userModel(CreateUserDto);
-    const result = await newUser.save();
-    return result;
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.userModel.create(createUserDto);
+    return newUser;
   }
 
   async comparePasswords(
@@ -28,7 +27,7 @@ export class UsersService {
   }
 
   async getUsers(user: User): Promise<User[]> {
-    const users = await this.userModel.find().sort({ createdAt: -1 }).exec();
+    const users = await this.userModel.find();
     if (user.role === 'admin') {
       return users
         .filter((user) => user.role !== 'admin')
@@ -43,25 +42,25 @@ export class UsersService {
           updatedAt: user.updatedAt,
         }));
     } else {
-      throw new NotFoundException('Unauthorized to view all users.');
+      throw new NotFoundException('No users.');
     }
   }
 
   async getUser(userId: string): Promise<User> {
     let user: User;
     try {
-      user = await this.userModel.findById(userId).exec();
+      user = await this.userModel.findById(userId);
       if (!user) {
         throw new NotFoundException('Could not find user.');
       }
       return user;
     } catch (error) {
-      throw new NotFoundException('Could not find user.');
+      console.error(error);
     }
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    const user = await this.userModel.findOne({ email: email });
+    const user = await this.userModel.findOne({ email });
     return user;
   }
 
@@ -76,12 +75,12 @@ export class UsersService {
   async updateUserById(
     userId: string,
     user: User,
-    UpdateUserDto: UpdateUserDto,
+    updateUserDto: UpdateUserDto,
   ): Promise<User> {
     if (user.role === 'admin') {
       const user = await this.userModel.findByIdAndUpdate(
         userId,
-        UpdateUserDto,
+        updateUserDto,
         {
           new: true,
         },
