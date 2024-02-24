@@ -3,8 +3,8 @@ import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Transaction } from './transaction.model';
-import { User } from 'src/users/users.model';
-import { GetUser } from 'src/decorator/get-user.decorator';
+import { User } from '../users/users.model';
+import { GetUser } from '../decorator/get-user.decorator';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -39,7 +39,9 @@ export class TransactionController {
   })
   @Get('/:id')
   @UseGuards(AuthGuard())
-  async getUserTransactions(@Param('id') id: string): Promise<Transaction[]> {
+  async getUserTransactions(
+    @Param('User Id') id: string,
+  ): Promise<Transaction[]> {
     return this.transactionService.getTransactionsByUser(id);
   }
 }
